@@ -19,6 +19,11 @@ const MovieListPage = (props) => {
 
     const genreId = Number(genreFilter);
 
+    const addToFavorites = (movieId) => {
+        const updatedMovies = movies.map((m) => (m.id === movieId ? { ...m, favorite: true } : m));
+        setMovies(updatedMovies);
+    };
+
     let displayedMovies = movies
         .filter((m) => {
             return m.title.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
@@ -60,7 +65,7 @@ const MovieListPage = (props) => {
                         genreFilter={genreFilter}
                     />
                 </Grid>
-                <MovieList movies={displayedMovies} />
+                <MovieList movies={displayedMovies} selectFavorite={addToFavorites} />
             </Grid>
         </Grid>
     );
