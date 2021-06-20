@@ -4,6 +4,8 @@ import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
+import RemoveFromFavorites from "../components/cardIcons/removeFromFavorites";
+import WriteReview from "../components/cardIcons/writeReview";
 
 const FavoriteMoviesPage = () => {
     const { favorites: movieIds } = useContext(MoviesContext);
@@ -23,10 +25,22 @@ const FavoriteMoviesPage = () => {
     if (isLoading) {
         return <Spinner />;
     }
-    const movies = favoriteMovieQueries.map((q) => q.data);
-    const toDo = () => true;
+    const favoriteMovies = favoriteMovieQueries.map((q) => q.data);
 
-    return <PageTemplate title="Favourite Movies" movies={movies} selectFavorite={toDo} />;
+    return (
+        <PageTemplate
+            title="Favorite Movies"
+            movies={favoriteMovies}
+            action={(movie) => {
+                return (
+                    <>
+                        <RemoveFromFavorites movie={movie} />
+                        <WriteReview movie={movie} />
+                    </>
+                );
+            }}
+        />
+    );
 };
 
 export default FavoriteMoviesPage;
