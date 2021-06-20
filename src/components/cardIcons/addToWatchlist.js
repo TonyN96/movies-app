@@ -6,12 +6,12 @@ import WatchlistAddIcon from "@material-ui/icons/PlaylistAdd";
 const AddToWatchlistIcon = ({ movie }) => {
     const context = useContext(MoviesContext);
 
-    const handleAddToPlaylist = (e) => {
+    const handleAddToWatchlist = (e) => {
         e.preventDefault();
-        context.addToFavorites(movie);
+        context.addToWatchlist(movie);
     };
     return (
-        <IconButton aria-label="add to watchlist" onClick={handleAddToPlaylist}>
+        <IconButton aria-label="add to watchlist" onClick={handleAddToWatchlist}>
             <WatchlistAddIcon color="primary" fontSize="large" />
         </IconButton>
     );
