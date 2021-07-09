@@ -5,13 +5,13 @@ import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import WriteReview from "../components/cardIcons/writeReview";
-import ToggleFavourites from "../components/cardIcons/toggleFavourites";
+import ToggleWatchlist from "../components/cardIcons/toggleWatchlist";
 
-const FavoriteMoviesPage = () => {
-    const { favorites: movieIds } = useContext(MoviesContext);
+const WatchlistPage = () => {
+    const { watchlist: movieIds } = useContext(MoviesContext);
 
     // Create an array of queries and run in parallel.
-    const favoriteMovieQueries = useQueries(
+    const watchlistMovieQueries = useQueries(
         movieIds.map((movieId) => {
             return {
                 queryKey: ["movie", { id: movieId }],
@@ -20,21 +20,21 @@ const FavoriteMoviesPage = () => {
         })
     );
     // Check if any of the parallel queries is still loading.
-    const isLoading = favoriteMovieQueries.find((m) => m.isLoading === true);
+    const isLoading = watchlistMovieQueries.find((m) => m.isLoading === true);
 
     if (isLoading) {
         return <Spinner />;
     }
-    const favoriteMovies = favoriteMovieQueries.map((q) => q.data);
+    const watchlistMovies = watchlistMovieQueries.map((q) => q.data);
 
     return (
         <PageTemplate
-            title="Favorite Movies"
-            movies={favoriteMovies}
+            title="Watchlist"
+            movies={watchlistMovies}
             action={(movie) => {
                 return (
                     <>
-                        <ToggleFavourites movie={movie} />
+                        <ToggleWatchlist movie={movie} />
                         <WriteReview movie={movie} />
                     </>
                 );
@@ -43,4 +43,4 @@ const FavoriteMoviesPage = () => {
     );
 };
 
-export default FavoriteMoviesPage;
+export default WatchlistPage;
