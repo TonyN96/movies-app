@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(2),
     },
+    overviewTitle: {
+        paddingTop: "40px",
+        paddingBottom: "10px",
+    },
+    overviewBody: {
+        paddingBottom: "30px",
+        fontWeight: 400,
+    },
 }));
 
 const MovieDetails = ({ movie }) => {
@@ -37,11 +45,11 @@ const MovieDetails = ({ movie }) => {
 
     return (
         <>
-            <Typography variant="h5" component="h3">
+            <Typography variant="h4" component="h3" className={classes.overviewTitle}>
                 Overview
             </Typography>
 
-            <Typography variant="h6" component="p">
+            <Typography variant="h6" component="p" className={classes.overviewBody}>
                 {movie.overview}
             </Typography>
 

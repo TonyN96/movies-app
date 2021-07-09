@@ -1,23 +1,25 @@
 import React from "react";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import HomeIcon from "@material-ui/icons/Home";
 import { withRouter } from "react-router-dom";
+import StarIcon from "@material-ui/icons/Star";
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         flexWrap: "wrap",
-        padding: theme.spacing(1.5),
+        alignItems: "center",
+        padding: theme.spacing(2.5),
         margin: 0,
     },
     tagLine: {
         fontSize: "1.5rem",
+    },
+    metaDeta: {
+        fontSize: "1.5rem",
+        paddingLeft: "30px",
     },
 }));
 
@@ -26,21 +28,16 @@ const MovieHeader = ({ movie, history }) => {
 
     return (
         <Paper component="div" className={classes.root}>
-            <IconButton aria-label="go back" onClick={() => history.goBack()}>
-                <ArrowBackIcon color="primary" fontSize="large" />
-            </IconButton>
-
             <Typography variant="h4" component="h3">
                 {movie.title}
-                <a href={movie.homepage}>
-                    <HomeIcon color="primary" />
-                </a>
                 <br />
-                <span className={classes.tagLine}>{`   "${movie.tagline}"`} </span>
+                {movie.tagLine && <span className={classes.tagLine}>{`"${movie.tagline}"`} </span>}
             </Typography>
-            <IconButton aria-label="go forward" onClick={() => history.goForward()}>
-                <ArrowForwardIcon color="primary" fontSize="large" />
-            </IconButton>
+            <Typography className={classes.metaDeta}>
+                Rating <br />
+                <StarIcon color="#ffea00" />
+                {movie.vote_average}/10
+            </Typography>
         </Paper>
     );
 };

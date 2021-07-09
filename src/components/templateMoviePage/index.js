@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
     gridList: {
         width: 450,
-        height: "100vh",
+        height: "600px",
     },
 }));
 
@@ -39,8 +39,10 @@ const TemplateMoviePage = ({ movie, children }) => {
     return (
         <>
             <MovieHeader movie={movie} />
-
             <Grid container spacing={5} style={{ padding: "15px" }}>
+                <Grid item xs={9}>
+                    {children}
+                </Grid>
                 <Grid item xs={3}>
                     <div className={classes.root}>
                         <GridList cellHeight={500} className={classes.gridList} cols={1}>
@@ -58,10 +60,6 @@ const TemplateMoviePage = ({ movie, children }) => {
                             ))}
                         </GridList>
                     </div>
-                </Grid>
-
-                <Grid item xs={9}>
-                    {children}
                 </Grid>
             </Grid>
         </>
