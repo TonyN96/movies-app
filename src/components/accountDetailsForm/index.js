@@ -1,5 +1,5 @@
 import { Avatar, Typography, TextField, Button, makeStyles, Container } from "@material-ui/core";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import SettingsIcon from "@material-ui/icons/Settings";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,10 +33,10 @@ const SignupForm = ({ history }) => {
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <PersonAddIcon />
+                    <SettingsIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Account Details
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -89,7 +89,7 @@ const SignupForm = ({ history }) => {
                         className={classes.submit}
                         onClick={onClickSignup}
                     >
-                        Sign up
+                        Update Details
                     </Button>
                 </form>
             </div>

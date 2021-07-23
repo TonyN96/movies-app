@@ -13,6 +13,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import LoginPage from "./pages/loginPage";
 import SignupPage from "./pages/signupPage";
+import AccountDetailsPage from "./pages/accountDetailsPage";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -33,6 +34,8 @@ const App = () => {
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/signup" component={SignupPage} />
                         <Route exact path="/home" component={HomePage} />
+                        <Route exact path="/account" component={AccountDetailsPage} />
+                        <Route exact path="/logout" component={LoginPage} />
                         <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                         <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
                         <Route exact path="/movies/watchlist" component={WatchlistPage} />
