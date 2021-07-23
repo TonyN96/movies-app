@@ -31,7 +31,7 @@ const SiteHeader = ({ history, loggedIn }) => {
 
     loggedIn
         ? (menuOptions = [
-              { label: "Home", path: "/" },
+              { label: "Home", path: "/home" },
               { label: "Upcoming", path: "/movies/upcoming" },
               { label: "Favorites", path: "/movies/favorites" },
               { label: "Watchlist", path: "/movies/watchlist" },

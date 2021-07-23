@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import MovieReviews from "../movieReviews";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,13 +39,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MovieDetails = ({ movie, credits }) => {
+const MovieDetails = ({ movie, credits, history }) => {
     // Don't miss this!
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     let sortedCast = credits.cast.sort((a, b) => (a.popularity < b.popularity ? 1 : -1));
     sortedCast = sortedCast.slice(0, 4);
+
+    const handleActorClick = (actor) => {
+        history.push(`/actor/${actor.id}`);
+    };
 
     return (
         <>
@@ -90,7 +95,11 @@ const MovieDetails = ({ movie, credits }) => {
                 </li>
                 {sortedCast.map((g) => (
                     <li key={g.name}>
-                        <Chip label={g.name} className={classes.chip} />
+                        <Chip
+                            label={g.name}
+                            className={classes.chip}
+                            onClick={() => handleActorClick(g)}
+                        />
                     </li>
                 ))}
             </Paper>
@@ -115,4 +124,4 @@ const MovieDetails = ({ movie, credits }) => {
         </>
     );
 };
-export default MovieDetails;
+export default withRouter(MovieDetails);
