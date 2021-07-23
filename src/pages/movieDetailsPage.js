@@ -3,28 +3,30 @@ import { withRouter } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
 import { getMovie } from "../api/tmdb-api";
+import { getCredits } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
 const MovieDetailsPage = (props) => {
     const { id } = props.match.params;
 
-    const { data: movie, error, isLoading, isError } = useQuery(["movie", { id: id }], getMovie);
+    const movieResult = useQuery(["movie", { id: id }], getMovie);
+    const creditsResult = useQuery(["credits", { id: id }], getCredits);
 
-    if (isLoading) {
+    if (movieResult.isLoading || creditsResult.isLoading) {
         return <Spinner />;
     }
 
-    if (isError) {
-        return <h1>{error.message}</h1>;
+    if (movieResult.isError || creditsResult.isError) {
+        return <h1>{movieResult.error.message}</h1>;
     }
 
     return (
         <>
-            {movie ? (
+            {movieResult.data && creditsResult.data ? (
                 <>
-                    <PageTemplate movie={movie}>
-                        <MovieDetails movie={movie} />
+                    <PageTemplate movie={movieResult.data} credits={creditsResult.data}>
+                        <MovieDetails movie={movieResult.data} credits={creditsResult.data} />
                     </PageTemplate>
                 </>
             ) : (

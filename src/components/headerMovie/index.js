@@ -35,7 +35,7 @@ const MovieHeader = ({ movie, history }) => {
             </Typography>
             <Typography className={classes.metaDeta}>
                 Rating <br />
-                <StarIcon color="#ffea00" />
+                <StarIcon />
                 {movie.vote_average}/10
             </Typography>
         </Paper>

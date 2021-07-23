@@ -38,10 +38,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MovieDetails = ({ movie }) => {
+const MovieDetails = ({ movie, credits }) => {
     // Don't miss this!
     const classes = useStyles();
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    let sortedCast = credits.cast.sort((a, b) => (a.popularity < b.popularity ? 1 : -1));
+    sortedCast = sortedCast.slice(0, 4);
 
     return (
         <>
@@ -75,6 +78,17 @@ const MovieDetails = ({ movie }) => {
                     <Chip label="Production Countries" className={classes.chip} color="primary" />
                 </li>
                 {movie.production_countries.map((g) => (
+                    <li key={g.name}>
+                        <Chip label={g.name} className={classes.chip} />
+                    </li>
+                ))}
+            </Paper>
+
+            <Paper component="ul" className={classes.root}>
+                <li>
+                    <Chip label="Cast" className={classes.chip} color="primary" />
+                </li>
+                {sortedCast.map((g) => (
                     <li key={g.name}>
                         <Chip label={g.name} className={classes.chip} />
                     </li>
