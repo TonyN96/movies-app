@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Typography from "@material-ui/core/Typography";
@@ -18,14 +19,20 @@ const useStyles = makeStyles((theme) => ({
     card: {
         maxWidth: 345,
         backgroundColor: "#f50057",
+        padding: "8px",
     },
     media: { height: 300 },
-
+    header: {
+        lineHeight: "1.5px",
+    },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 220,
         width: "90%",
         backgroundColor: "rgb(255, 255, 255)",
+    },
+    select: {
+        padding: "10px",
     },
 }));
 
@@ -45,7 +52,7 @@ export default function FilterMoviesCard(props) {
 
     const handleChange = (e, type, value) => {
         e.preventDefault();
-        props.onUserInput(type, value); // NEW
+        props.onUserInput(type, value);
     };
 
     const handleTextChange = (e, props) => {
@@ -61,10 +68,12 @@ export default function FilterMoviesCard(props) {
             <CardHeader
                 className={classes.header}
                 title={
-                    <Typography variant="h5" component="p">
+                    <Box display="flex" alignItems="center">
                         <SearchIcon fontSize="large" />
-                        Filter the movies.
-                    </Typography>
+                        <Typography variant="h5" component="p">
+                            Filter the movies
+                        </Typography>
+                    </Box>
                 }
             />
             <CardContent>
@@ -78,8 +87,11 @@ export default function FilterMoviesCard(props) {
                     onChange={handleTextChange}
                 />
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="genre-label">Genre</InputLabel>
+                    <InputLabel id="genre-label" className={classes.select}>
+                        Genre
+                    </InputLabel>
                     <Select
+                        className={classes.select}
                         labelId="genre-label"
                         id="genre-select"
                         value={props.genreFilter}

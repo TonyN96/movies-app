@@ -53,7 +53,7 @@ function MovieListTemplate({ movies, title, action }) {
                 </Grid>
             ) : (
                 <MuiAlert className={classes.alert} severity="info">
-                    You don't have any favourites added yet!
+                    No movies found..
                 </MuiAlert>
             )}
         </Grid>

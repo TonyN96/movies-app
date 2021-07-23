@@ -11,12 +11,14 @@ import Typography from "@material-ui/core/Typography";
 import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import Grid from "@material-ui/core/Grid";
+import Tooltip from "@material-ui/core/Tooltip";
 import img from "../../images/film-poster-placeholder.png";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 const useStyles = makeStyles({
     card: { maxWidth: 345 },
     media: { height: 500 },
+    header: { height: 60 },
 });
 
 export default function MovieCard({ movie, action }) {
@@ -45,27 +47,29 @@ export default function MovieCard({ movie, action }) {
             />
             <CardContent>
                 <Grid container>
-                    <Grid item xs={6}>
+                    <Grid item xs={9}>
                         <Typography variant="h6" component="p">
                             <CalendarIcon fontSize="small" />
-                            {movie.release_date}
+                            &nbsp;{movie.release_date}
                         </Typography>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
                         <Typography variant="h6" component="p">
                             <StarRateIcon fontSize="small" />
-                            {"  "} {movie.vote_average}{" "}
+                            &nbsp;{movie.vote_average}
                         </Typography>
                     </Grid>
                 </Grid>
             </CardContent>
             <CardActions disableSpacing>
                 {action(movie)}
-                <Link to={`/movies/${movie.id}`}>
-                    <Button variant="outlined" size="medium" color="primary">
-                        More Info ...
-                    </Button>
-                </Link>
+                <Tooltip title="More info on this movie">
+                    <Link to={`/movies/${movie.id}`}>
+                        <Button variant="outlined" size="medium" color="primary">
+                            More Info ...
+                        </Button>
+                    </Link>
+                </Tooltip>
             </CardActions>
         </Card>
     );
