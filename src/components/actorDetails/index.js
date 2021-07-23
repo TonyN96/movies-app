@@ -11,8 +11,6 @@ import {
     Avatar,
     ListItemText,
     Box,
-    Grid,
-    Image,
 } from "@material-ui/core";
 import CakeIcon from "@material-ui/icons/Cake";
 import WcIcon from "@material-ui/icons/Wc";
@@ -139,7 +137,7 @@ const ActorDetails = ({ actor, history }) => {
             </List>
             <Box display="flex" justifyContent="space-between">
                 <Box marginRight="50px">
-                    <img src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} />
+                    <img src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} alt="actor" />
                 </Box>
                 <Box>
                     <Typography variant="h4" component="h3" className={classes.biographyTitle}>

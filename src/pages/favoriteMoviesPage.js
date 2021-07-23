@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import MovieListTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
 import { getMovie } from "../api/tmdb-api";
@@ -7,6 +7,7 @@ import Spinner from "../components/spinner";
 import WriteReview from "../components/cardIcons/writeReview";
 import ToggleFavourites from "../components/cardIcons/toggleFavourites";
 import SiteHeader from "../components/siteHeader";
+import MuiAlert from "@material-ui/lab/Alert";
 
 const FavoriteMoviesPage = () => {
     const { favorites: movieIds } = useContext(MoviesContext);
@@ -29,19 +30,21 @@ const FavoriteMoviesPage = () => {
     const favoriteMovies = favoriteMovieQueries.map((q) => q.data);
 
     return (
-        <PageTemplate
-            title="Favorite Movies"
-            movies={favoriteMovies}
-            action={(movie) => {
-                return (
-                    <>
-                        <SiteHeader loggedIn={true} />
-                        <ToggleFavourites movie={movie} />
-                        <WriteReview movie={movie} />
-                    </>
-                );
-            }}
-        />
+        <>
+            <SiteHeader loggedIn={true} />
+            <MovieListTemplate
+                title="Favorite Movies"
+                movies={favoriteMovies}
+                action={(movie) => {
+                    return (
+                        <>
+                            <ToggleFavourites movie={movie} />
+                            <WriteReview movie={movie} />
+                        </>
+                    );
+                }}
+            />
+        </>
     );
 };
 
