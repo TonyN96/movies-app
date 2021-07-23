@@ -6,6 +6,7 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import WriteReview from "../components/cardIcons/writeReview";
 import ToggleWatchlist from "../components/cardIcons/toggleWatchlist";
+import SiteHeader from "../components/siteHeader";
 
 const WatchlistPage = () => {
     const { watchlist: movieIds } = useContext(MoviesContext);
@@ -28,18 +29,21 @@ const WatchlistPage = () => {
     const watchlistMovies = watchlistMovieQueries.map((q) => q.data);
 
     return (
-        <PageTemplate
-            title="Watchlist"
-            movies={watchlistMovies}
-            action={(movie) => {
-                return (
-                    <>
-                        <ToggleWatchlist movie={movie} />
-                        <WriteReview movie={movie} />
-                    </>
-                );
-            }}
-        />
+        <>
+            <SiteHeader loggedIn={true} />
+            <PageTemplate
+                title="Watchlist"
+                movies={watchlistMovies}
+                action={(movie) => {
+                    return (
+                        <>
+                            <ToggleWatchlist movie={movie} />
+                            <WriteReview movie={movie} />
+                        </>
+                    );
+                }}
+            />
+        </>
     );
 };
 

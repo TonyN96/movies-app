@@ -6,6 +6,7 @@ import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import WriteReview from "../components/cardIcons/writeReview";
 import ToggleFavourites from "../components/cardIcons/toggleFavourites";
+import SiteHeader from "../components/siteHeader";
 
 const FavoriteMoviesPage = () => {
     const { favorites: movieIds } = useContext(MoviesContext);
@@ -34,6 +35,7 @@ const FavoriteMoviesPage = () => {
             action={(movie) => {
                 return (
                     <>
+                        <SiteHeader loggedIn={true} />
                         <ToggleFavourites movie={movie} />
                         <WriteReview movie={movie} />
                     </>

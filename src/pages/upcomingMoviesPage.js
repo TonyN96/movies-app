@@ -4,6 +4,7 @@ import { getUpcomingMovies } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import ToggleWatchlistIcon from "../components/cardIcons/toggleWatchlist";
+import SiteHeader from "../components/siteHeader";
 
 const UpcomingMoviesPage = () => {
     const { data, error, isLoading, isError } = useQuery("upcoming", getUpcomingMovies);
@@ -22,13 +23,16 @@ const UpcomingMoviesPage = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
     return (
-        <PageTemplate
-            title="Upcoming Movies"
-            movies={movies}
-            action={(movie) => {
-                return <ToggleWatchlistIcon movie={movie} />;
-            }}
-        />
+        <>
+            <SiteHeader loggedIn={true} />
+            <PageTemplate
+                title="Upcoming Movies"
+                movies={movies}
+                action={(movie) => {
+                    return <ToggleWatchlistIcon movie={movie} />;
+                }}
+            />
+        </>
     );
 };
 export default UpcomingMoviesPage;

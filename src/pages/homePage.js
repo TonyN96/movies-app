@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import { getMovies } from "../api/tmdb-api";
 import ToggleFavourites from "../components/cardIcons/toggleFavourites";
+import SiteHeader from "../components/siteHeader";
 
 const HomePage = (props) => {
     const { data, error, isLoading, isError } = useQuery("discover", getMovies);
@@ -22,13 +23,16 @@ const HomePage = (props) => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
     return (
-        <PageTemplate
-            title="Discover Movies"
-            movies={movies}
-            action={(movie) => {
-                return <ToggleFavourites movie={movie} />;
-            }}
-        />
+        <>
+            <SiteHeader loggedIn={true} />
+            <PageTemplate
+                title="Discover Movies"
+                movies={movies}
+                action={(movie) => {
+                    return <ToggleFavourites movie={movie} />;
+                }}
+            />
+        </>
     );
 };
 

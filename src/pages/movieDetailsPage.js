@@ -6,6 +6,7 @@ import { getMovie } from "../api/tmdb-api";
 import { getCredits } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
+import SiteHeader from "../components/siteHeader";
 
 const MovieDetailsPage = (props) => {
     const { id } = props.match.params;
@@ -25,6 +26,7 @@ const MovieDetailsPage = (props) => {
         <>
             {movieResult.data && creditsResult.data ? (
                 <>
+                    <SiteHeader loggedIn={true} />
                     <PageTemplate movie={movieResult.data} credits={creditsResult.data}>
                         <MovieDetails movie={movieResult.data} credits={creditsResult.data} />
                     </PageTemplate>

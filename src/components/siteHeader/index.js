@@ -20,20 +20,27 @@ const useStyles = makeStyles((theme) => ({
     offset: theme.mixins.toolbar,
 }));
 
-const SiteHeader = ({ history }) => {
+const SiteHeader = ({ history, loggedIn }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-    const menuOptions = [
-        { label: "Home", path: "/" },
-        { label: "Upcoming", path: "/movies/upcoming" },
-        { label: "Favorites", path: "/movies/favorites" },
-        { label: "Watchlist", path: "/movies/watchlist" },
-        { label: "Option 4", path: "/" },
-    ];
+    let menuOptions;
+
+    loggedIn
+        ? (menuOptions = [
+              { label: "Home", path: "/" },
+              { label: "Upcoming", path: "/movies/upcoming" },
+              { label: "Favorites", path: "/movies/favorites" },
+              { label: "Watchlist", path: "/movies/watchlist" },
+              { label: "Option 4", path: "/" },
+          ])
+        : (menuOptions = [
+              { label: "Login", path: "/login" },
+              { label: "Sign up", path: "/signup" },
+          ]);
 
     const handleMenuSelect = (pageURL) => {
         history.push(pageURL);
