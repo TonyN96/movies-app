@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import MovieListTemplate from "../components/templateMovieListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
@@ -7,7 +7,6 @@ import Spinner from "../components/spinner";
 import WriteReview from "../components/cardIcons/writeReview";
 import ToggleFavourites from "../components/cardIcons/toggleFavourites";
 import SiteHeader from "../components/siteHeader";
-import MuiAlert from "@material-ui/lab/Alert";
 
 const FavoriteMoviesPage = () => {
     const { favorites: movieIds } = useContext(MoviesContext);
