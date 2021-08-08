@@ -30,6 +30,7 @@ function ActorsList({ actors, title }) {
             <Grid item xs={12}>
                 <Header title={title} />
             </Grid>
+
             {actors.length > 0 ? (
                 <Grid item container spacing={5}>
                     {actorCards}

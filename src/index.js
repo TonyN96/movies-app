@@ -13,9 +13,9 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import LoginPage from "./pages/loginPage";
 import SignupPage from "./pages/signupPage";
-import AccountDetailsPage from "./pages/accountDetailsPage";
 import ActorDetailsPage from "./pages/actorDetailsPage";
 import ActorsListPage from "./pages/actorsListPage";
+import MultiSearchPage from "./pages/multiSearchPage";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -36,7 +36,6 @@ const App = () => {
                         <Route exact path="/login" component={LoginPage} />
                         <Route exact path="/signup" component={SignupPage} />
                         <Route exact path="/home" component={HomePage} />
-                        <Route exact path="/account" component={AccountDetailsPage} />
                         <Route exact path="/logout" component={LoginPage} />
                         <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                         <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
@@ -46,6 +45,7 @@ const App = () => {
                         <Route path="/movies/:id" component={MoviePage} />
                         <Route path="/actors/" component={ActorsListPage} />
                         <Route path="/actor/:id" component={ActorDetailsPage} />
+                        <Route path="/search" component={MultiSearchPage} />
                         <Route exact path="/" component={LoginPage} />
                         <Redirect from="*" to="/" />
                     </Switch>
