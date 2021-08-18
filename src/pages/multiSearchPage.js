@@ -1,5 +1,5 @@
 import SiteHeader from "../components/siteHeader";
-import MultiSearch from "../components/multiSearch/multiSearch";
+import MultiSearch from "../components/multiSearch";
 
 const MultiSearchPage = () => {
     return (

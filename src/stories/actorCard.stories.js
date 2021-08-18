@@ -1,17 +1,17 @@
-import MovieDetails from "../components/movieDetails";
-import { SampleMovie, SampleCredits } from "./sampleData";
+import ActorCard from "../components/actorCard";
+import { SampleActor } from "./sampleData";
 import { MemoryRouter } from "react-router";
 import MoviesContextProvider from "../contexts/moviesContext";
 
 export default {
-    title: "Movie Details Page/MovieDetails",
-    component: MovieDetails,
+    title: "Actor Details Page/ActorCard",
+    component: ActorCard,
     decorators: [
         (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
         (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
     ],
 };
 
-export const Basic = () => <MovieDetails movie={SampleMovie} credits={SampleCredits} />;
+export const Basic = () => <ActorCard actor={SampleActor} />;
 
 Basic.storyName = "Default";

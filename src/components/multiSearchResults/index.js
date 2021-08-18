@@ -44,6 +44,8 @@ function capitalizeFirstLetter(string) {
 }
 
 const MultiSearchResults = (props) => {
+    console.log(props);
+
     const classes = useStyles();
     const { data, error, isLoading, isError } = useQuery(
         ["result", { searchQuery: props.searchQuery }],

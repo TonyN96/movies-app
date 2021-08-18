@@ -60,6 +60,8 @@ const useStyles = makeStyles((theme) => ({
 const ActorDetails = ({ actor, history }) => {
     const classes = useStyles();
 
+    console.log(actor);
+
     return (
         <Container>
             <div style={{ width: "100%" }}>

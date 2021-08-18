@@ -2,7 +2,7 @@ import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { Avatar, Typography, InputBase, Button, Container } from "@material-ui/core";
-import MultiSearchResults from "../multiSearchResults/multiSearchResults";
+import MultiSearchResults from "../multiSearchResults";
 
 const useStyles = makeStyles((theme) => ({
     search: {

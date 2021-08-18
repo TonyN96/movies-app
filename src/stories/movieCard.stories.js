@@ -1,9 +1,8 @@
 import React from "react";
 import MovieCard from "../components/movieCard";
-import SampleMovie from "./sampleData";
+import { SampleMovie } from "./sampleData";
 import { MemoryRouter } from "react-router";
 import MoviesContextProvider from "../contexts/moviesContext";
-import { action } from "@storybook/addon-actions";
 import ToggleFavourites from "../components/cardIcons/toggleFavourites";
 
 export default {

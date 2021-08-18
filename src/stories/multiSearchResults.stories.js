@@ -1,6 +1,7 @@
-import FilterMoviesCard from "../components/filterMoviesCard";
+import MultiSearchResults from "../components/multiSearchResults";
+import { SampleSearchProps } from "./sampleData";
 import { MemoryRouter } from "react-router";
-import { action } from "@storybook/addon-actions";
+import MoviesContextProvider from "../contexts/moviesContext";
 import { QueryClientProvider, QueryClient } from "react-query";
 
 const queryClient = new QueryClient({
@@ -14,15 +15,15 @@ const queryClient = new QueryClient({
 });
 
 export default {
-    title: "Home Page/FilterMoviesCard",
-    component: FilterMoviesCard,
+    title: "Multi Search Page/MultiSearchResults",
+    component: MultiSearchResults,
     decorators: [
         (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
+        (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
         (Story) => <QueryClientProvider client={queryClient}>{Story()}</QueryClientProvider>,
     ],
 };
 
-export const Basic = () => {
-    return <FilterMoviesCard onUserInput={action("filter input")} />;
-};
+export const Basic = () => <MultiSearchResults props={SampleSearchProps} />;
+
 Basic.storyName = "Default";

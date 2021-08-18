@@ -1,17 +1,16 @@
-import MovieDetails from "../components/movieDetails";
-import { SampleMovie, SampleCredits } from "./sampleData";
+import MultiSearch from "../components/multiSearch";
 import { MemoryRouter } from "react-router";
 import MoviesContextProvider from "../contexts/moviesContext";
 
 export default {
-    title: "Movie Details Page/MovieDetails",
-    component: MovieDetails,
+    title: "Multi Search Page/MultiSearch",
+    component: MultiSearch,
     decorators: [
         (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
         (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
     ],
 };
 
-export const Basic = () => <MovieDetails movie={SampleMovie} credits={SampleCredits} />;
+export const Basic = () => <MultiSearch />;
 
 Basic.storyName = "Default";
