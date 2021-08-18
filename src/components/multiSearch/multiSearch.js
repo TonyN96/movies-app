@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },
-    searchResults: {
-        width: "100%",
-    },
 }));
 
 const MultiSearch = () => {
@@ -85,7 +82,7 @@ const MultiSearch = () => {
                     </form>
                 </div>
             </Container>
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
                 {searchQuery !== "" ? (
                     <MultiSearchResults
                         searchQuery={searchQuery}

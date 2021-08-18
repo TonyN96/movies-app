@@ -38,7 +38,7 @@ export default function ActorCard({ actor }) {
             />
             <CardActions disableSpacing>
                 <Tooltip title="More info on this actor">
-                    <Link to={`/actor/${actor.id}`}>
+                    <Link to={`/person/${actor.id}`}>
                         <Button variant="outlined" size="medium" color="primary">
                             More Info..
                         </Button>

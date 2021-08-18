@@ -48,7 +48,7 @@ const MovieDetails = ({ movie, credits, history }) => {
     sortedCast = sortedCast.slice(0, 4);
 
     const handleActorClick = (actor) => {
-        history.push(`/actor/${actor.id}`);
+        history.push(`/person/${actor.id}`);
     };
 
     return (

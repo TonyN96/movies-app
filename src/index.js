@@ -42,11 +42,11 @@ const App = () => {
                         <Route exact path="/movies/watchlist" component={WatchlistPage} />
                         <Route path="/reviews/:id" component={MovieReviewPage} />
                         <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
-                        <Route path="/movies/:id" component={MoviePage} />
+                        <Route path="/movie/:id" component={MoviePage} />
                         <Route path="/actors/" component={ActorsListPage} />
-                        <Route path="/actor/:id" component={ActorDetailsPage} />
+                        <Route path="/person/:id" component={ActorDetailsPage} />
                         <Route path="/search" component={MultiSearchPage} />
-                        <Route exact path="/" component={LoginPage} />
+                        <Route exact path="/" component={HomePage} />
                         <Redirect from="*" to="/" />
                     </Switch>
                 </MoviesContextProvider>

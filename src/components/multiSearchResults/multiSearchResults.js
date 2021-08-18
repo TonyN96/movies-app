@@ -1,8 +1,32 @@
 import { useQuery } from "react-query";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { multiSearchQuery } from "../../api/tmdb-api";
 import Spinner from "../spinner";
-import { Typography, Card, CardHeader, CardContent } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+    Typography,
+    Card,
+    CardHeader,
+    CardContent,
+    List,
+    ListItem,
+    ListItemText,
+} from "@material-ui/core";
+
+const useStyles = makeStyles({
+    card: { padding: "10px", marginBottom: "25px" },
+    media: { height: 500 },
+    listItem: { padding: 0 },
+    header: { color: "#3f51b5" },
+    cardContent: { paddingTop: 0, paddingBottom: 0 },
+    link: {
+        textDecoration: "none",
+        color: "inherit",
+        "&:hover": {
+            color: "#3f51b5",
+        },
+    },
+});
 
 // https://stackoverflow.com/questions/14696326/break-array-of-objects-into-separate-arrays-based-on-a-property
 function groupBy(arr, property) {
@@ -20,6 +44,7 @@ function capitalizeFirstLetter(string) {
 }
 
 const MultiSearchResults = (props) => {
+    const classes = useStyles();
     const { data, error, isLoading, isError } = useQuery(
         ["result", { searchQuery: props.searchQuery }],
         multiSearchQuery
@@ -38,29 +63,38 @@ const MultiSearchResults = (props) => {
     let resultArray = [];
 
     for (let media in mediaTypes) {
-        const names = [];
+        const mediaObjects = [];
         mediaTypes[media].forEach((element) => {
-            if (element.name) {
-                names.push(element.name);
-            } else if (element.title) {
-                names.push(element.title);
-            } else {
-                names.push(element.id);
-            }
+            mediaObjects.push({
+                title: element.title || element.name,
+                url: `/${element.media_type}/${element.id}`,
+            });
         });
         const result = (
-            <Card>
+            <Card className={classes.card}>
                 <CardHeader
+                    className={classes.header}
                     title={
                         <Typography variant="h5" component="p">
                             {capitalizeFirstLetter(media)}{" "}
                         </Typography>
                     }
                 ></CardHeader>
-                <CardContent>
-                    {names.map((element) => {
-                        return <Typography>{element}</Typography>;
-                    })}
+                <CardContent className={classes.cardContent}>
+                    <List>
+                        {mediaObjects.map((element) => {
+                            return (
+                                <ListItem key={element.id} className={classes.listItem}>
+                                    <Link to={element.url} className={classes.link}>
+                                        <ListItemText
+                                            primary={element.title}
+                                            variant="body2"
+                                        ></ListItemText>
+                                    </Link>
+                                </ListItem>
+                            );
+                        })}
+                    </List>
                 </CardContent>
             </Card>
         );
@@ -69,7 +103,7 @@ const MultiSearchResults = (props) => {
 
     return (
         <>
-            {resultArray.map((element) => {
+            {resultArray.map((element, key) => {
                 return <>{element}</>;
             })}
         </>
