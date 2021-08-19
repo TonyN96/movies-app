@@ -1,7 +1,6 @@
 import ActorsList from "../components/actorsList";
 import { SampleActor } from "./sampleData";
 import { MemoryRouter } from "react-router";
-import ToggleFavouritesIcon from "../components/cardIcons/toggleFavourites";
 import Grid from "@material-ui/core/Grid";
 import MoviesContextProvider from "../contexts/moviesContext";
 

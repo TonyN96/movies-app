@@ -1,4 +1,3 @@
-import React from "react";
 import MovieCard from "../components/movieCard";
 import { SampleMovie } from "./sampleData";
 import { MemoryRouter } from "react-router";
@@ -15,13 +14,7 @@ export default {
 };
 
 export const Basic = () => {
-    return (
-        <MovieCard
-            movie={SampleMovie}
-            action={(movie) => <ToggleFavourites movie={movie} />}
-            taging={(movie) => null}
-        />
-    );
+    return <MovieCard movie={SampleMovie} action={(movie) => <ToggleFavourites movie={movie} />} />;
 };
 Basic.storyName = "Default";
 

@@ -1,16 +1,21 @@
 import MovieList from "../components/movieList";
-import SampleMovie from "./sampleData";
+import { SampleMovie } from "./sampleData";
 import { MemoryRouter } from "react-router";
 import ToggleFavouritesIcon from "../components/cardIcons/toggleFavourites";
 import Grid from "@material-ui/core/Grid";
+import MoviesContextProvider from "../contexts/moviesContext";
 
 export default {
     title: "Home Page/MovieList",
     component: MovieList,
-    decorators: [(Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>],
+    decorators: [
+        (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
+        (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
+    ],
 };
 
 export const Basic = () => {
+    console.log(SampleMovie);
     const movies = [
         { ...SampleMovie, id: 1 },
         { ...SampleMovie, id: 2 },
