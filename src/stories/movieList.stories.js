@@ -15,7 +15,6 @@ export default {
 };
 
 export const Basic = () => {
-    console.log(SampleMovie);
     const movies = [
         { ...SampleMovie, id: 1 },
         { ...SampleMovie, id: 2 },

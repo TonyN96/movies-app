@@ -1,6 +1,8 @@
 import { Avatar, Typography, TextField, Button, makeStyles, Container } from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import { useCallback } from "react";
 import { withRouter } from "react-router-dom";
+import app from "../../config/firebase";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: "100%", // Fix IE 11 issue.
+        width: "100%",
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -25,9 +27,19 @@ const useStyles = makeStyles((theme) => ({
 const SignupForm = ({ history }) => {
     const classes = useStyles();
 
-    const onClickSignup = () => {
-        history.push("/home");
-    };
+    const onClickSignup = useCallback(
+        async (event) => {
+            event.preventDefault();
+            const { email, password } = event.target.elements;
+            try {
+                await app.auth().createUserWithEmailAndPassword(email.value, password.value);
+                history.push("/");
+            } catch (error) {
+                alert(error);
+            }
+        },
+        [history]
+    );
 
     return (
         <Container component="main" maxWidth="xs">
@@ -38,7 +50,7 @@ const SignupForm = ({ history }) => {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={onClickSignup} className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -87,7 +99,6 @@ const SignupForm = ({ history }) => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={onClickSignup}
                     >
                         Sign up
                     </Button>

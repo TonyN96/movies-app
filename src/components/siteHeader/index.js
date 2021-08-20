@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withRouter } from "react-router-dom";
 import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import app from "../../config/firebase";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles((theme) => ({
-    title: {
-        flexGrow: 1,
+    toolbar: {
+        display: "flex",
+        justifyContent: "space-between",
     },
     offset: theme.mixins.toolbar,
 }));
@@ -26,6 +28,7 @@ const SiteHeader = ({ history, loggedIn }) => {
     const open = Boolean(anchorEl);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+    const { currentUser } = useContext(AuthContext);
 
     let menuOptions;
 
@@ -45,7 +48,7 @@ const SiteHeader = ({ history, loggedIn }) => {
           ]);
 
     const handleMenuSelect = (pageURL) => {
-        history.push(pageURL);
+        pageURL === "/logout" ? app.auth().signOut() : history.push(pageURL);
     };
 
     const handleMenu = (event) => {
@@ -55,10 +58,15 @@ const SiteHeader = ({ history, loggedIn }) => {
     return (
         <>
             <AppBar position="fixed" color="secondary">
-                <Toolbar>
+                <Toolbar className={classes.toolbar}>
                     <Typography variant="h4" className={classes.title}>
                         TMDB Client
                     </Typography>
+                    {currentUser && (
+                        <Typography variant="subtitle1" className={classes.user}>
+                            {currentUser.email}
+                        </Typography>
+                    )}
                     {isMobile ? (
                         <>
                             <IconButton
@@ -96,7 +104,7 @@ const SiteHeader = ({ history, loggedIn }) => {
                             </Menu>
                         </>
                     ) : (
-                        <>
+                        <div>
                             {menuOptions.map((opt) => (
                                 <Button
                                     key={opt.label}
@@ -106,7 +114,7 @@ const SiteHeader = ({ history, loggedIn }) => {
                                     {opt.label}
                                 </Button>
                             ))}
-                        </>
+                        </div>
                     )}
                 </Toolbar>
             </AppBar>

@@ -15,6 +15,8 @@ import SignupPage from "./pages/signupPage";
 import ActorDetailsPage from "./pages/actorDetailsPage";
 import ActorsListPage from "./pages/actorsListPage";
 import MultiSearchPage from "./pages/multiSearchPage";
+import { AuthProvider } from "./contexts/authContext";
+import PrivateRoute from "./privateRoute";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -28,30 +30,48 @@ const queryClient = new QueryClient({
 
 const App = () => {
     return (
-        <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-                <MoviesContextProvider>
-                    <Switch>
-                        <Route exact path="/login" component={LoginPage} />
-                        <Route exact path="/signup" component={SignupPage} />
-                        <Route exact path="/home" component={HomePage} />
-                        <Route exact path="/logout" component={LoginPage} />
-                        <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                        <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
-                        <Route exact path="/movies/watchlist" component={WatchlistPage} />
-                        <Route path="/reviews/:id" component={MovieReviewPage} />
-                        <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
-                        <Route path="/movie/:id" component={MoviePage} />
-                        <Route path="/actors/" component={ActorsListPage} />
-                        <Route path="/person/:id" component={ActorDetailsPage} />
-                        <Route path="/search" component={MultiSearchPage} />
-                        <Route exact path="/" component={HomePage} />
-                        <Redirect from="*" to="/" />
-                    </Switch>
-                </MoviesContextProvider>
-            </BrowserRouter>
-            <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        <AuthProvider>
+            <QueryClientProvider client={queryClient}>
+                <BrowserRouter>
+                    <MoviesContextProvider>
+                        <Switch>
+                            <Route exact path="/login" component={LoginPage} />
+                            <Route exact path="/signup" component={SignupPage} />
+                            <PrivateRoute exact path="/home" component={HomePage} />
+                            <PrivateRoute exact path="/logout" component={LoginPage} />
+                            <PrivateRoute
+                                exact
+                                path="/reviews/form"
+                                component={AddMovieReviewPage}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/movies/upcoming"
+                                component={UpcomingMoviesPage}
+                            />
+                            <PrivateRoute
+                                exact
+                                path="/movies/watchlist"
+                                component={WatchlistPage}
+                            />
+                            <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
+                            <PrivateRoute
+                                exact
+                                path="/movies/favorites"
+                                component={FavoriteMoviesPage}
+                            />
+                            <PrivateRoute path="/movie/:id" component={MoviePage} />
+                            <PrivateRoute path="/actors/" component={ActorsListPage} />
+                            <PrivateRoute path="/person/:id" component={ActorDetailsPage} />
+                            <PrivateRoute path="/search" component={MultiSearchPage} />
+                            <PrivateRoute exact path="/" component={HomePage} />
+                            <Redirect from="*" to="/" />
+                        </Switch>
+                    </MoviesContextProvider>
+                </BrowserRouter>
+                <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+        </AuthProvider>
     );
 };
 

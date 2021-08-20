@@ -1,6 +1,9 @@
 import { Avatar, Typography, TextField, Button, makeStyles, Container } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { withRouter } from "react-router-dom";
+import { useCallback, useContext } from "react";
+import { Redirect, withRouter } from "react-router-dom";
+import app from "../../config/firebase";
+import { AuthContext } from "../../contexts/authContext";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,9 +28,25 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = ({ history }) => {
     const classes = useStyles();
 
-    const onClickLogin = () => {
-        history.push("/home");
-    };
+    const onClickLogin = useCallback(
+        async (event) => {
+            event.preventDefault();
+            const { email, password } = event.target.elements;
+            try {
+                await app.auth().signInWithEmailAndPassword(email.value, password.value);
+                history.push("/");
+            } catch (error) {
+                alert(error);
+            }
+        },
+        [history]
+    );
+
+    const { currentUser } = useContext(AuthContext);
+
+    if (currentUser) {
+        return <Redirect to="/" />;
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -38,7 +57,7 @@ const LoginForm = ({ history }) => {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={onClickLogin} className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -67,7 +86,6 @@ const LoginForm = ({ history }) => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={onClickLogin}
                     >
                         Login
                     </Button>
