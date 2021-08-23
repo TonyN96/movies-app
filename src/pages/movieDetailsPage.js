@@ -18,8 +18,10 @@ const MovieDetailsPage = (props) => {
         return <Spinner />;
     }
 
-    if (movieResult.isError || creditsResult.isError) {
+    if (movieResult.isError) {
         return <h1>{movieResult.error.message}</h1>;
+    } else if (creditsResult.isError) {
+        return <h1>{creditsResult.error.message}</h1>;
     }
 
     return (

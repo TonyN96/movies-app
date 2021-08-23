@@ -58,6 +58,8 @@ const MultiSearchResults = (props) => {
         return <h1>{error.message}</h1>;
     }
 
+    console.log(data.results);
+
     const mediaTypes = groupBy(data.results, "media_type");
 
     let resultArray = [];

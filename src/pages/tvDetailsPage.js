@@ -17,8 +17,10 @@ const TvDetailsPage = (props) => {
         return <Spinner />;
     }
 
-    if (tvResult.isError || creditsResult.isError) {
+    if (tvResult.isError) {
         return <h1>{tvResult.error.message}</h1>;
+    } else if (creditsResult.isError) {
+        return <h1>{creditsResult.error.message}</h1>;
     }
 
     return (

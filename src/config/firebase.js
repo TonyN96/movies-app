@@ -1,5 +1,3 @@
-// Firebase authentication implemented from following tutorial:
-// https://www.youtube.com/watch?v=unr4s3jd9qA&ab_channel=MaksimIvanov
 import firebase from "firebase/app";
 import "firebase/auth";
 
