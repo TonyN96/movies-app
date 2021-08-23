@@ -73,7 +73,9 @@ const MovieDetails = ({ movie, credits, history }) => {
             </Paper>
             <Paper component="ul" className={classes.root}>
                 <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-                <Chip icon={<MonetizationIcon />} label={`${movie.revenue.toLocaleString()}`} />
+                {movie.revenue && (
+                    <Chip icon={<MonetizationIcon />} label={`${movie.revenue.toLocaleString()}`} />
+                )}
                 <Chip icon={<StarRate />} label={`${movie.vote_average} (${movie.vote_count}`} />
                 <Chip label={`Released: ${movie.release_date}`} />
             </Paper>

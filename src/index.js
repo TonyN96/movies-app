@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
+import TvPage from "./pages/tvDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import WatchlistPage from "./pages/watchlistPage";
@@ -61,6 +62,7 @@ const App = () => {
                                 component={FavoriteMoviesPage}
                             />
                             <PrivateRoute path="/movie/:id" component={MoviePage} />
+                            <PrivateRoute path="/tv/:id" component={TvPage} />
                             <PrivateRoute path="/actors/" component={ActorsListPage} />
                             <PrivateRoute path="/person/:id" component={ActorDetailsPage} />
                             <PrivateRoute path="/search" component={MultiSearchPage} />
